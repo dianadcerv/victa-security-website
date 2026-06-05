@@ -1,10 +1,73 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronRight, Shield, Lightbulb, Users, CheckCircle, ArrowRight } from 'lucide-react';
-
+ 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqznapy';
+ 
 export default function VictaSecuritySolutions() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [consultationOpen, setConsultationOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    organization: '',
+    name: '',
+    email: '',
+    phone: '',
+    interest: '',
+    notes: '',
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+ 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+ 
+  const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitting(true);
+  setSubmitMessage('');
 
+  try {
+    const response = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        organization: formData.organization,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        interest: formData.interest,
+        notes: formData.notes,
+      }),
+    });
+
+    if (response.ok) {
+      setSubmitMessage('success');
+      setFormData({
+        organization: '',
+        name: '',
+        email: '',
+        phone: '',
+        interest: '',
+        notes: '',
+      });
+      setTimeout(() => {
+        setConsultationOpen(false);
+        setSubmitMessage('');
+      }, 2000);
+    } else {
+      setSubmitMessage('error');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    setSubmitMessage('error');
+  } finally {
+    setSubmitting(false);
+  }
+};
+ 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
       {/* Navigation */}
@@ -49,7 +112,7 @@ export default function VictaSecuritySolutions() {
           </div>
         )}
       </nav>
-
+ 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -78,7 +141,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
-
+ 
       {/* Approach */}
       <section id="approach" className="py-20 px-6 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
@@ -110,7 +173,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
-
+ 
       {/* Services */}
       <section id="services" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -118,7 +181,7 @@ export default function VictaSecuritySolutions() {
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
             We combine expertise across physical security, enterprise software, and community strategy to deliver comprehensive solutions.
           </p>
-
+ 
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
@@ -181,7 +244,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
-
+ 
       {/* About */}
       <section id="about" className="py-20 px-6 bg-slate-900/50">
         <div className="max-w-4xl mx-auto">
@@ -204,7 +267,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
-
+ 
       {/* CTA Section */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto bg-amber-500/10 border border-amber-500/30 rounded-lg p-12 text-center space-y-6">
@@ -220,7 +283,7 @@ export default function VictaSecuritySolutions() {
           </button>
         </div>
       </section>
-
+ 
       {/* Consultation Modal */}
       {consultationOpen && (
         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 p-6">
@@ -235,81 +298,119 @@ export default function VictaSecuritySolutions() {
               </button>
             </div>
             
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold mb-2">Organization Name</label>
-                <input
-                  type="text"
-                  placeholder="Your organization"
-                  className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
-                />
+            {submitMessage === 'success' ? (
+              <div className="space-y-4">
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-6 text-center space-y-2">
+                  <CheckCircle className="text-emerald-500 mx-auto" size={48} />
+                  <h4 className="text-xl font-semibold">Thank You!</h4>
+                  <p className="text-slate-300">Your assessment request has been received. I'll follow up within 24 hours.</p>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2">Your Name</label>
-                <input
-                  type="text"
-                  placeholder="Full name"
-                  className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2">Email</label>
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2">Phone</label>
-                <input
-                  type="tel"
-                  placeholder="(123) 456-7890"
-                  className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2">Primary Interest</label>
-                <select className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 focus:outline-none focus:border-amber-500">
-                  <option value="">Select one</option>
-                  <option value="physical">Physical Security Assessment</option>
-                  <option value="saas">SaaS Implementation</option>
-                  <option value="laminate">Security Laminate/Hardening</option>
-                  <option value="mixed">Multiple Services</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-semibold mb-2">Brief Description (Optional)</label>
-                <textarea
-                  placeholder="What are you trying to solve?"
-                  rows="3"
-                  className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
-                ></textarea>
-              </div>
-              <div className="flex gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setConsultationOpen(false)}
-                  className="flex-1 px-4 py-2 border border-slate-700 rounded-lg text-slate-300 hover:border-slate-600 transition"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 px-4 py-2 bg-amber-500 text-slate-950 rounded-lg font-semibold hover:bg-amber-400 transition"
-                >
-                  Request Assessment
-                </button>
-              </div>
-              <p className="text-xs text-slate-400 text-center">
-                I'll follow up within 24 hours to confirm your assessment time.
-              </p>
-            </form>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Organization Name</label>
+                  <input
+                    type="text"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleInputChange}
+                    placeholder="Your organization"
+                    className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Your Name</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Full name"
+                    className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="(123) 456-7890"
+                    className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Primary Interest</label>
+                  <select
+                    name="interest"
+                    value={formData.interest}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 focus:outline-none focus:border-amber-500"
+                    required
+                  >
+                    <option value="">Select one</option>
+                    <option value="Physical Security Assessment">Physical Security Assessment</option>
+                    <option value="SaaS Implementation">SaaS Implementation</option>
+                    <option value="Security Laminate/Hardening">Security Laminate/Hardening</option>
+                    <option value="Multiple Services">Multiple Services</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold mb-2">Brief Description (Optional)</label>
+                  <textarea
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleInputChange}
+                    placeholder="What are you trying to solve?"
+                    rows="3"
+                    className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-slate-50 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  ></textarea>
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setConsultationOpen(false)}
+                    className="flex-1 px-4 py-2 border border-slate-700 rounded-lg text-slate-300 hover:border-slate-600 transition"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="flex-1 px-4 py-2 bg-amber-500 text-slate-950 rounded-lg font-semibold hover:bg-amber-400 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? 'Sending...' : 'Request Assessment'}
+                  </button>
+                </div>
+                {submitMessage === 'error' && (
+                  <p className="text-sm text-red-400 text-center">
+                    There was an error submitting your request. Please try again.
+                  </p>
+                )}
+              </form>
+            )}
           </div>
         </div>
       )}
-
+ 
       {/* Footer */}
       <footer className="border-t border-slate-800 py-12 px-6">
         <div className="max-w-6xl mx-auto">
@@ -347,7 +448,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </footer>
-
+ 
       <style jsx>{`
         @keyframes fadeIn {
           from {
