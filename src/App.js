@@ -1,8 +1,47 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronRight, Shield, Lightbulb, Users, CheckCircle, ArrowRight } from 'lucide-react';
- 
+
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqznapy';
- 
+
+const products = [
+  {
+    name: "SL-15 Security Laminate",
+    tagline: "Forced Entry & Shooter Deterrence",
+    description:
+      "15-mil transparent laminate that holds glass in place under repeated impact, buying critical time for first responders. Shot through multiple times without collapsing. Optically clear — no visible change to your facility.",
+    specs: ["15 mil | 420 psi break strength", "87% visible light transmitted | 99% UV rejection", "5-year material / 10-year installation warranty"],
+    certifications: ["ANSI Z97.1", "BMAG Level 1", "CPSC 16 CFR", "ASTM E84", "ULC S332-93"],
+    bestFor: ["Schools & universities", "Retail & commercial", "Municipal offices"],
+  },
+  {
+    name: "SL-31 Riot Laminate",
+    tagline: "Riot & Prolonged Targeted Attack",
+    description:
+      "World-patented 31-mil laminate engineered for sustained, high-force attacks and crowd riots. 2.6× the break strength of SL-15 — designed for high-value facilities where standard deterrence isn't enough.",
+    specs: ["31 mil | 1,100 psi break strength", "87% visible light transmitted | Optically clear", "5-year material / 10-year installation warranty"],
+    certifications: ["ANSI Z97.1", "BMAG Level 1", "ASTM E84", "Hospital Safety Compliance", "ULC S332-93"],
+    bestFor: ["Government buildings", "Financial institutions", "Healthcare facilities"],
+  },
+  {
+    name: "BR Bullet-Resistant Laminate",
+    tagline: "One-Way Bullet Resistant",
+    description:
+      "Transforms existing glass into a one-way ballistic shield — stops incoming rounds while allowing response from inside. Third-party verified. GSA Level 1 & 2 certified for federal facility compliance.",
+    specs: ["Variable thickness | 1,500+ psi break strength", "Optically clear | 3rd-party independently verified", "GSA Level 1 & 2 — federal facility eligible"],
+    certifications: ["UL 752", "GSA Level 1 & 2", "BMAG Level 1", "CPSC 16 CFR", "ANSI Z97.1"],
+    bestFor: ["Federal & government facilities", "Law enforcement", "Secure command centers"],
+  },
+  {
+    name: "Flex-Board Ballistic Panels",
+    tagline: "NIJ-Rated Rigid Armor",
+    description:
+      "Flexible, curvable ballistic boards for retrofitting doors, desks, walls, and safe rooms. No structural renovation required — installs in 1–2 hours per door. Zero ricochet. Independently tested at NTS Labs.",
+    specs: ["NIJ IIIA (handguns) & NIJ III (rifles)", "1.7–3.2 lbs/sqft | No ricochet", "1–2 hrs install per door | No retrofitting required"],
+    certifications: ["NIJ-STD-0108.01", "NTS Labs Tested", "GSA Level 1 & 2", "UL 752 Level III", "BMAG Level 1"],
+    bestFor: ["Safe rooms & panic rooms", "Reception desks", "School classrooms"],
+  },
+];
+
 export default function VictaSecuritySolutions() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [consultationOpen, setConsultationOpen] = useState(false);
@@ -16,58 +55,49 @@ export default function VictaSecuritySolutions() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
- 
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
- 
+
   const handleFormSubmit = async (e) => {
-  e.preventDefault();
-  setSubmitting(true);
-  setSubmitMessage('');
+    e.preventDefault();
+    setSubmitting(true);
+    setSubmitMessage('');
 
-  try {
-    const response = await fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        organization: formData.organization,
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        interest: formData.interest,
-        notes: formData.notes,
-      }),
-    });
-
-    if (response.ok) {
-      setSubmitMessage('success');
-      setFormData({
-        organization: '',
-        name: '',
-        email: '',
-        phone: '',
-        interest: '',
-        notes: '',
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          organization: formData.organization,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          interest: formData.interest,
+          notes: formData.notes,
+        }),
       });
-      setTimeout(() => {
-        setConsultationOpen(false);
-        setSubmitMessage('');
-      }, 2000);
-    } else {
+
+      if (response.ok) {
+        setSubmitMessage('success');
+        setFormData({ organization: '', name: '', email: '', phone: '', interest: '', notes: '' });
+        setTimeout(() => {
+          setConsultationOpen(false);
+          setSubmitMessage('');
+        }, 2000);
+      } else {
+        setSubmitMessage('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitMessage('error');
+    } finally {
+      setSubmitting(false);
     }
-  } catch (error) {
-    console.error('Error submitting form:', error);
-    setSubmitMessage('error');
-  } finally {
-    setSubmitting(false);
-  }
-};
- 
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50">
       {/* Navigation */}
@@ -77,15 +107,13 @@ export default function VictaSecuritySolutions() {
             <span className="text-slate-50">Victa</span>
             <span className="text-amber-500"> Security</span>
           </div>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-slate-50"
-          >
+          <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-slate-50">
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           <div className="hidden md:flex gap-8">
             <a href="#approach" className="text-slate-300 hover:text-amber-500 transition">Approach</a>
             <a href="#services" className="text-slate-300 hover:text-amber-500 transition">Services</a>
+            <a href="#products" className="text-slate-300 hover:text-amber-500 transition">Products</a>
             <a href="#about" className="text-slate-300 hover:text-amber-500 transition">About</a>
             <button
               onClick={() => setConsultationOpen(true)}
@@ -99,12 +127,10 @@ export default function VictaSecuritySolutions() {
           <div className="md:hidden bg-slate-900 border-t border-slate-800 p-6 space-y-4">
             <a href="#approach" className="block text-slate-300 hover:text-amber-500">Approach</a>
             <a href="#services" className="block text-slate-300 hover:text-amber-500">Services</a>
+            <a href="#products" className="block text-slate-300 hover:text-amber-500">Products</a>
             <a href="#about" className="block text-slate-300 hover:text-amber-500">About</a>
             <button
-              onClick={() => {
-                setConsultationOpen(true);
-                setMenuOpen(false);
-              }}
+              onClick={() => { setConsultationOpen(true); setMenuOpen(false); }}
               className="w-full px-4 py-2 bg-amber-500 text-slate-950 rounded-lg font-semibold"
             >
               Book Assessment
@@ -112,7 +138,7 @@ export default function VictaSecuritySolutions() {
           </div>
         )}
       </nav>
- 
+
       {/* Hero */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
@@ -121,7 +147,7 @@ export default function VictaSecuritySolutions() {
               Strategic Security Consulting for Communities & Organizations
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl">
-              Assessment-first approach to physical security, threat mitigation, and technology implementation. We identify risks others miss and recommend solutions tailored to your reality, not our inventory.
+              Assessment-first approach to physical security, threat mitigation, and technology implementation. We identify risks others miss and recommend solutions — including certified ballistic protection products — tailored to your reality, not our inventory.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
@@ -141,7 +167,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
- 
+
       {/* Approach */}
       <section id="approach" className="py-20 px-6 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
@@ -151,17 +177,20 @@ export default function VictaSecuritySolutions() {
               {
                 step: "01",
                 title: "Deep Dive Assessment",
-                description: "We evaluate your physical layout, threat profile, existing systems, and operational constraints. No assumptions, no sales pitch, just thorough analysis.",
+                description:
+                  "We evaluate your physical layout, threat profile, existing systems, and operational constraints. No assumptions, no sales pitch, just thorough analysis.",
               },
               {
                 step: "02",
                 title: "Custom Recommendations",
-                description: "Based on what we find, we recommend solutions from the full spectrum: physical hardening, technology implementation, process improvements, or vendor partnerships.",
+                description:
+                  "Based on what we find, we recommend solutions from the full spectrum: physical hardening, certified ballistic products, technology implementation, process improvements, or vendor partnerships.",
               },
               {
                 step: "03",
                 title: "Strategic Implementation",
-                description: "Whether we implement directly or guide you through vendor selection, we ensure solutions actually solve your problem and integrate cleanly.",
+                description:
+                  "Whether we implement directly or guide you through vendor selection, we ensure solutions actually solve your problem and integrate cleanly.",
               },
             ].map((item, idx) => (
               <div key={idx} className="space-y-4">
@@ -173,7 +202,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
- 
+
       {/* Services */}
       <section id="services" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -181,7 +210,7 @@ export default function VictaSecuritySolutions() {
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
             We combine expertise across physical security, enterprise software, and community strategy to deliver comprehensive solutions.
           </p>
- 
+
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
@@ -190,8 +219,8 @@ export default function VictaSecuritySolutions() {
                 items: [
                   "Threat assessments and vulnerability analysis",
                   "Physical hardening recommendations (glazing, perimeter, access control)",
-                  "Security laminate implementation (Victus Defense partnership)",
-                  "Compliance and regulatory readiness",
+                  "Certified Clear-Armor laminate & ballistic board installation",
+                  "Compliance readiness (NIJ, GSA, CMMC, ANSI, UL 752)",
                 ],
               },
               {
@@ -244,9 +273,62 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       </section>
- 
+
+      {/* Products */}
+      <section id="products" className="py-20 px-6 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-500 text-sm font-semibold">
+            Certified Clear-Armor Dealer
+          </div>
+          <h2 className="text-4xl font-bold mb-4">Ballistic Protection Products</h2>
+          <p className="text-xl text-slate-300 mb-16 max-w-3xl">
+            As a certified seller of Clear-Armor LLC's patented product line through our partnership with Victus Defense LLC, we offer independently tested, patent-protected solutions for every threat level — from forced-entry deterrence to GSA-certified bullet-resistant installations.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {products.map((product, idx) => (
+              <div key={idx} className="p-8 bg-slate-950/60 rounded-lg border border-slate-800 hover:border-amber-500/50 transition space-y-4">
+                <div>
+                  <h3 className="text-2xl font-semibold">{product.name}</h3>
+                  <p className="text-amber-500 font-medium mt-1">{product.tagline}</p>
+                </div>
+                <p className="text-slate-300 leading-relaxed">{product.description}</p>
+                <ul className="space-y-1">
+                  {product.specs.map((spec, i) => (
+                    <li key={i} className="flex gap-3 text-slate-400 text-sm">
+                      <ChevronRight size={16} className="text-amber-500 flex-shrink-0 mt-0.5" />
+                      <span>{spec}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {product.certifications.map((cert, i) => (
+                    <span key={i} className="px-2 py-1 bg-slate-800 text-slate-400 text-xs rounded border border-slate-700">
+                      {cert}
+                    </span>
+                  ))}
+                </div>
+                <div className="pt-3 border-t border-slate-800">
+                  <p className="text-xs text-slate-500 font-semibold uppercase tracking-wide mb-2">Best For</p>
+                  <div className="flex flex-wrap gap-2">
+                    {product.bestFor.map((use, i) => (
+                      <span key={i} className="px-2 py-1 bg-amber-500/10 text-amber-400 text-xs rounded">
+                        {use}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-sm text-slate-500 text-center">
+            All Clear-Armor products are independently tested by NTS Technical Systems and carry a 5-year material / 10-year installation warranty. DUNS & CAGE numbers available for government procurement.
+          </p>
+        </div>
+      </section>
+
       {/* About */}
-      <section id="about" className="py-20 px-6 bg-slate-900/50">
+      <section id="about" className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold mb-8">Why Victa Security</h2>
           <div className="space-y-6 text-lg text-slate-300">
@@ -254,22 +336,22 @@ export default function VictaSecuritySolutions() {
               With 18 years in SaaS implementation, customer success, and enterprise sales engineering, I've seen firsthand how organizations solve complex problems: through deep understanding, clear communication, and strategic partnerships.
             </p>
             <p>
-              I bring that experience to physical security consulting. Most consultants are product-driven: they sell what they have. I'm solution-driven: I assess what you need and recommend the best approach, whether that's our direct services, a vendor partnership, or process improvement.
+              I bring that experience to physical security consulting. Most consultants are product-driven: they sell what they have. I'm solution-driven: I assess what you need and recommend the best approach, whether that's our direct services, a certified product installation, or process improvement.
             </p>
             <p>
               I specialize in working with government agencies, municipal facilities, schools, and corporate organizations where security is non-negotiable and risk tolerance is low.
             </p>
             <div className="pt-4 border-t border-slate-700">
               <p className="text-sm text-slate-400">
-                <strong>Note:</strong> For physical security laminate and hardening projects, I partner with Victus Defense, a specialized provider with deep expertise in security film installation and compliance. You get my strategic guidance plus their technical excellence.
+                <strong>Note:</strong> As a certified seller of Clear-Armor LLC — the patent-holding manufacturer behind the glass laminate and ballistic panel products above — through our partnership with Victus Defense LLC, every product recommendation comes backed by four U.S. patents, independent third-party testing (NTS Technical Systems), and a 10-year installation warranty. You get strategic guidance and certified product expertise under one roof.
               </p>
             </div>
           </div>
         </div>
       </section>
- 
+
       {/* CTA Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-slate-900/50">
         <div className="max-w-4xl mx-auto bg-amber-500/10 border border-amber-500/30 rounded-lg p-12 text-center space-y-6">
           <h2 className="text-3xl font-bold">Ready to Assess Your Security Posture?</h2>
           <p className="text-xl text-slate-300">
@@ -283,21 +365,18 @@ export default function VictaSecuritySolutions() {
           </button>
         </div>
       </section>
- 
+
       {/* Consultation Modal */}
       {consultationOpen && (
         <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center z-50 p-6">
           <div className="bg-slate-900 border border-slate-800 rounded-lg max-w-md w-full p-8 space-y-6">
             <div className="flex justify-between items-center">
               <h3 className="text-2xl font-bold">Schedule Assessment</h3>
-              <button
-                onClick={() => setConsultationOpen(false)}
-                className="text-slate-400 hover:text-slate-50"
-              >
+              <button onClick={() => setConsultationOpen(false)} className="text-slate-400 hover:text-slate-50">
                 <X size={24} />
               </button>
             </div>
-            
+
             {submitMessage === 'success' ? (
               <div className="space-y-4">
                 <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-6 text-center space-y-2">
@@ -368,7 +447,8 @@ export default function VictaSecuritySolutions() {
                     <option value="">Select one</option>
                     <option value="Physical Security Assessment">Physical Security Assessment</option>
                     <option value="SaaS Implementation">SaaS Implementation</option>
-                    <option value="Security Laminate/Hardening">Security Laminate/Hardening</option>
+                    <option value="Security Laminate / Glass Hardening">Security Laminate / Glass Hardening</option>
+                    <option value="Ballistic Panels">Ballistic Panels</option>
                     <option value="Multiple Services">Multiple Services</option>
                     <option value="Other">Other</option>
                   </select>
@@ -410,7 +490,7 @@ export default function VictaSecuritySolutions() {
           </div>
         </div>
       )}
- 
+
       {/* Footer */}
       <footer className="border-t border-slate-800 py-12 px-6">
         <div className="max-w-6xl mx-auto">
@@ -427,6 +507,7 @@ export default function VictaSecuritySolutions() {
               <ul className="space-y-2 text-slate-400">
                 <li><a href="#approach" className="hover:text-amber-500 transition">Our Approach</a></li>
                 <li><a href="#services" className="hover:text-amber-500 transition">Services</a></li>
+                <li><a href="#products" className="hover:text-amber-500 transition">Products</a></li>
                 <li><a href="#about" className="hover:text-amber-500 transition">About</a></li>
               </ul>
             </div>
@@ -441,24 +522,18 @@ export default function VictaSecuritySolutions() {
             </div>
           </div>
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
-            <p>&copy; 2024 Victa Security Solutions. All rights reserved.</p>
+            <p>&copy; 2026 Victa Security Solutions. All rights reserved.</p>
             <p>
               Specializing in <strong>Physical Security</strong> + <strong>SaaS Implementation</strong> + <strong>Community Strategy</strong>
             </p>
           </div>
         </div>
       </footer>
- 
+
       <style jsx>{`
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in {
           animation: fadeIn 0.8s ease-out;
