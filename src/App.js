@@ -103,10 +103,13 @@ export default function VictaSecuritySolutions() {
       {/* Navigation */}
       <nav className="fixed w-full top-0 z-50 bg-slate-950/95 backdrop-blur-sm border-b border-slate-800">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold tracking-tight">
-            <span className="text-slate-50">Victa</span>
-            <span className="text-amber-500"> Security</span>
-          </div>
+          <a href="#" className="flex items-center gap-3" aria-label="Victa Security Solutions LLC">
+            <img src="/images/logo-emblem.png" alt="" className="h-10 w-auto" />
+            <span className="text-2xl font-bold tracking-tight leading-none">
+              <span className="text-slate-50">Victa</span>
+              <span className="text-amber-500"> Security</span>
+            </span>
+          </a>
           <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-slate-50">
             {menuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -227,7 +230,7 @@ export default function VictaSecuritySolutions() {
                 icon: Lightbulb,
                 title: "SaaS Implementation & Advisory",
                 items: [
-                  "Security system implementation and configuration",
+                  "System implementation and configuration",
                   "Software procurement guidance",
                   "Change management and adoption support",
                   "Integration and custom solutions",
@@ -496,10 +499,7 @@ export default function VictaSecuritySolutions() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
-              <div className="text-xl font-bold mb-4">
-                <span className="text-slate-50">Victa</span>
-                <span className="text-amber-500"> Security</span>
-              </div>
+              <img src="/images/logo.png" alt="Victa Security Solutions LLC" className="h-28 w-auto mb-4" />
               <p className="text-slate-400">Strategic security consulting for communities and organizations.</p>
             </div>
             <div>
