@@ -8,7 +8,7 @@ Hi [First Name],
 
 Looking forward to our discovery session on [Date]. To make the most of our time together, I ask that you complete this brief intake form beforehand:
 
-https://www.victasecuritysolutions.com/discovery?client=[client-slug]
+https://www.victasecuritysolutions.com/intake/[client-slug]
 
 It takes about 10-15 minutes and covers your facility, current security posture, and goals for our conversation. Your responses are used only to prepare for our assessment - no sales pitch, just context so we can focus on what matters to you.
 

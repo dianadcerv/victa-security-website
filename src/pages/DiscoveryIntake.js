@@ -1,5 +1,5 @@
 ﻿import React, { useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';
 import FormField from '../components/FormField';
@@ -26,8 +26,8 @@ function buildInitialFormState() {
 }
 
 export default function DiscoveryIntake() {
-  const [searchParams] = useSearchParams();
-  const clientSlug = searchParams.get('client') || 'unspecified';
+  const { clientSlug: rawSlug } = useParams();
+  const clientSlug = rawSlug || 'unspecified';
   const [formData, setFormData] = useState(buildInitialFormState);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);

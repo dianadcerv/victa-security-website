@@ -11,7 +11,7 @@ cp .env.example .env
 npm start
 ```
 
-Open http://localhost:3000/discovery to preview the form.
+Open http://localhost:3000/intake/test-client to preview the form.
 
 ## 2. Google Sheet + Apps Script (stores responses automatically)
 
@@ -36,7 +36,7 @@ Push changes to GitHub and deploy using your existing pipeline for victasecurity
 
 **Important:** Set `REACT_APP_INTAKE_ENDPOINT` and `REACT_APP_INTAKE_SECRET` in your hosting provider environment variables before building.
 
-After deploy, verify: https://www.victasecuritysolutions.com/discovery
+After deploy, verify: https://www.victasecuritysolutions.com/intake/test-client
 
 ## 4. Connect Google to Cursor (optional, for reading your discovery Doc)
 
@@ -67,7 +67,7 @@ After deploy, verify: https://www.victasecuritysolutions.com/discovery
 1. Choose a client slug, e.g. `acme-corp`
 2. Send this link:
 
-   `https://www.victasecuritysolutions.com/discovery?client=acme-corp`
+   `https://www.victasecuritysolutions.com/intake/acme-corp`
 
 3. When they submit, filter the Sheet by `client_slug` = `acme-corp`
 
