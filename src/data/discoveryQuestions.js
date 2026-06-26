@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Discovery intake field definitions.
  * Update after syncing with your Google Doc discovery questionnaire.
  */

@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import SiteHeader from '../components/SiteHeader';

@@ -8,7 +8,7 @@ Hi [First Name],
 
 Looking forward to our discovery session on [Date]. To make the most of our time together, I ask that you complete this brief intake form beforehand:
 
-https://www.victasecuritysolutions.com/intake/[client-slug]
+[Paste intake link from Clients tab, column C — or Victa Intake > Add new client]
 
 It takes about 10-15 minutes and covers your facility, current security posture, and goals for our conversation. Your responses are used only to prepare for our assessment - no sales pitch, just context so we can focus on what matters to you.
 
@@ -25,4 +25,4 @@ www.victasecuritysolutions.com
 **Replace before sending:**
 - `[First Name]` - contact first name
 - `[Date]` - discovery session date
-- `[client-slug]` - short identifier, e.g. `acme-corp` (use lowercase, hyphens, no spaces)
+- Intake link - copy from **Clients** tab column C (generated automatically when you add the client name)

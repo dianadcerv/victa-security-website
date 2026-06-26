@@ -1,7 +1,5 @@
 # Victa Discovery Intake - Setup Guide
 
-This guide walks you through connecting Google, deploying the intake backend, and sending your first client link.
-
 ## 1. Install dependencies and run locally
 
 ```bash
@@ -13,66 +11,63 @@ npm start
 
 Open http://localhost:3000/intake/test-client to preview the form.
 
-## 2. Google Sheet + Apps Script (stores responses automatically)
+## 2. Google Sheet + Apps Script
 
-1. Create a new Google Sheet: **Victa Discovery Intake Responses**
-2. Go to **Extensions > Apps Script**
-3. Replace the default code with the contents of `apps-script/Code.gs`
-4. Open **Project Settings > Script properties** and add:
-   - `INTAKE_SECRET` = a long random string (e.g. from a password generator)
-5. **Deploy > New deployment > Web app**
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-6. Copy the Web App URL (ends in `/exec`)
-7. In your local `.env` file set:
-   - `REACT_APP_INTAKE_ENDPOINT` = the Web App URL
-   - `REACT_APP_INTAKE_SECRET` = same value as `INTAKE_SECRET`
+1. Open your Google Sheet: **Victa Discovery Intake Responses**
+2. **Extensions > Apps Script**
+3. Replace all code with the contents of `apps-script/Code.gs`
+4. **Save**, then reload the spreadsheet
+5. You should see a **Victa Intake** menu in the menu bar
+6. Click **Victa Intake > Setup sheets** (creates **Responses** and **Clients** tabs)
 
-Test: submit the form locally and confirm a new row appears in the Sheet.
+### Script properties (Project Settings > Script properties)
 
-## 3. Deploy the website
+| Property | Required | Example |
+|----------|----------|---------|
+| `INTAKE_SECRET` | Yes | long random string (same as Vercel `REACT_APP_INTAKE_SECRET`) |
+| `INTAKE_BASE_URL` | No | `https://www.victasecuritysolutions.com/intake` (default if omitted) |
 
-Push changes to GitHub and deploy using your existing pipeline for victasecuritysolutions.com.
+### Deploy web app
 
-**Important:** Set `REACT_APP_INTAKE_ENDPOINT` and `REACT_APP_INTAKE_SECRET` in your hosting provider environment variables before building.
+1. **Deploy > New deployment > Web app**
+2. Execute as: **Me**
+3. Who has access: **Anyone**
+4. Copy the URL (ends in `/exec`) into Vercel and local `.env` as `REACT_APP_INTAKE_ENDPOINT`
 
-After deploy, verify: https://www.victasecuritysolutions.com/intake/test-client
+## 3. Deploy the website (Vercel)
 
-## 4. Connect Google to Cursor (optional, for reading your discovery Doc)
+Set in **Vercel > Project > Settings > Environment Variables**:
 
-1. Create a Google Cloud project and enable Drive, Docs, and Sheets APIs
-2. Create OAuth Desktop credentials
-3. Add to `C:\Users\Diana\.cursor\mcp.json`:
+- `REACT_APP_INTAKE_ENDPOINT`
+- `REACT_APP_INTAKE_SECRET`
 
-```json
-{
-  "mcpServers": {
-    "google-mcp": {
-      "command": "npx",
-      "args": ["-y", "@chieflatif/google-mcp"],
-      "env": {
-        "MCP_CORE_TOOLS": "1",
-        "GOOGLE_CLIENT_ID": "YOUR_CLIENT_ID",
-        "GOOGLE_CLIENT_SECRET": "YOUR_CLIENT_SECRET"
-      }
-    }
-  }
-}
-```
+Redeploy after saving. Test: https://www.victasecuritysolutions.com/intake/test-client
 
-4. Restart Cursor, enable the MCP server, and complete OAuth in Agent mode
+## 4. New client workflow (no manual link building)
 
-## 5. Send a link to a new client
+Use the **Clients** tab in your Google Sheet:
 
-1. Choose a client slug, e.g. `acme-corp`
-2. Send this link:
+### Option A — type in the sheet
 
-   `https://www.victasecuritysolutions.com/intake/acme-corp`
+1. Open the **Clients** tab
+2. Type the client name in **Client Name** (column A)
+3. **Client Slug** and **Intake Link** fill in automatically
+4. Copy the link from column C into your email
 
-3. When they submit, filter the Sheet by `client_slug` = `acme-corp`
+### Option B — menu shortcut
 
-See `CLIENT_EMAIL.md` for a ready-to-send email template.
+1. **Victa Intake > Add new client…**
+2. Enter name (and optional email)
+3. A dialog shows the ready-to-copy intake link
+
+When the client submits the form, filter **Responses** by `client_slug` to review their answers.
+
+See `CLIENT_EMAIL.md` for email copy.
+
+## 5. Connect Google to Cursor (optional)
+
+See previous MCP setup in `.cursor/mcp.json` if you want to sync discovery questions from a Google Doc.
 
 ## Updating form questions
 
-Edit `src/data/discoveryQuestions.js` to match your Google Doc. If you add/remove fields, also update `apps-script/Code.gs` header row and `mapPayloadToRow_`.
+Edit `src/data/discoveryQuestions.js`. If you add/remove fields, update `RESPONSE_HEADERS` and `mapPayloadToRow_` in `apps-script/Code.gs`.
