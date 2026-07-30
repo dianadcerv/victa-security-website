@@ -1,7 +1,21 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronRight, Shield, Lightbulb, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { INTEREST_OPTIONS } from './data/interestMap';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqznapy';
+const INTAKE_ENDPOINT = process.env.REACT_APP_INTAKE_ENDPOINT || '';
+const INTAKE_SECRET = process.env.REACT_APP_INTAKE_SECRET || '';
+const PLACEHOLDER_MARKERS = ['YOUR_DEPLOYMENT_ID', 'choose-a-long-random-string'];
+
+function isRequestConfigured() {
+  if (!INTAKE_ENDPOINT || !INTAKE_SECRET) return false;
+  return !PLACEHOLDER_MARKERS.some(
+    (marker) => INTAKE_ENDPOINT.includes(marker) || INTAKE_SECRET.includes(marker)
+  );
+}
+
+function isGoogleAppsScriptUrl(url) {
+  return url.includes('script.google.com');
+}
 
 const products = [
   {
@@ -66,21 +80,40 @@ export default function VictaSecuritySolutions() {
     setSubmitting(true);
     setSubmitMessage('');
 
-    try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          organization: formData.organization,
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          interest: formData.interest,
-          notes: formData.notes,
-        }),
-      });
+    if (!isRequestConfigured()) {
+      console.error('Request form backend is not configured (REACT_APP_INTAKE_ENDPOINT / REACT_APP_INTAKE_SECRET).');
+      setSubmitMessage('error');
+      setSubmitting(false);
+      return;
+    }
 
-      if (response.ok) {
+    try {
+      const payload = {
+        type: 'lead',
+        organization: formData.organization,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        interest: formData.interest,
+        notes: formData.notes,
+        submittedAt: new Date().toISOString(),
+      };
+
+      const body = new URLSearchParams();
+      body.append('secret', INTAKE_SECRET);
+      body.append('payload', JSON.stringify(payload));
+      body.append('type', 'lead');
+
+      const fetchOptions = {
+        method: 'POST',
+        body,
+        ...(isGoogleAppsScriptUrl(INTAKE_ENDPOINT) ? { mode: 'no-cors' } : {}),
+      };
+
+      const response = await fetch(INTAKE_ENDPOINT, fetchOptions);
+
+      // Apps Script no-cors: request is delivered; verify row in Clients sheet.
+      if (isGoogleAppsScriptUrl(INTAKE_ENDPOINT) || response.ok) {
         setSubmitMessage('success');
         setFormData({ organization: '', name: '', email: '', phone: '', interest: '', notes: '' });
         setTimeout(() => {
@@ -448,12 +481,11 @@ export default function VictaSecuritySolutions() {
                     required
                   >
                     <option value="">Select one</option>
-                    <option value="Physical Security Assessment">Physical Security Assessment</option>
-                    <option value="SaaS Implementation">SaaS Implementation</option>
-                    <option value="Security Laminate / Glass Hardening">Security Laminate / Glass Hardening</option>
-                    <option value="Ballistic Panels">Ballistic Panels</option>
-                    <option value="Multiple Services">Multiple Services</option>
-                    <option value="Other">Other</option>
+                    {INTEREST_OPTIONS.map((option) => (
+                      <option key={option.slug} value={option.label}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
