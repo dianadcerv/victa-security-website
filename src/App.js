@@ -369,13 +369,13 @@ export default function VictaSecuritySolutions() {
           <h2 className="text-4xl font-bold mb-8">Why Victa Security</h2>
           <div className="space-y-6 text-lg text-slate-300">
             <p>
-              With 18 years in SaaS implementation, customer success, and enterprise sales engineering, I've seen firsthand how organizations solve complex problems: through deep understanding, clear communication, and strategic partnerships.
+              AI is moving into every part of how we live and work — including how we protect people and facilities, and how those with malicious intent probe for weakness. Detection systems, access platforms, and decision tools are getting smarter; so are social engineering, deepfakes, and automated attacks. That gap is where organizations get left behind.
             </p>
             <p>
-              I bring that experience to physical security consulting. Most consultants are product-driven: they sell what they have. I'm solution-driven: I assess what you need and recommend the best approach, whether that's our direct services, a certified product installation, or process improvement.
+              Victa sits at the cutting edge of technology, people, and policy so you do not. We help you evaluate AI-enabled security products with clear eyes, harden the human and process layers attackers still exploit, and align recommendations with the policies and compliance reality your organization actually operates in.
             </p>
             <p>
-              I specialize in working with government agencies, municipal facilities, schools, and corporate organizations where security is non-negotiable and risk tolerance is low.
+              With 18 years in SaaS implementation, customer success, and enterprise sales engineering, I bring a solution-driven approach — not a product pitch. I assess what you need and recommend the best path forward: direct services, certified physical hardening, modern systems, or process improvement. I specialize in government agencies, municipal facilities, schools, and corporate organizations where security is non-negotiable and risk tolerance is low.
             </p>
             <div className="pt-4 border-t border-slate-700">
               <p className="text-sm text-slate-400">
