@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ChevronRight, Shield, Lightbulb, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { Menu, X, ChevronRight, Shield, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import { INTEREST_OPTIONS } from './data/interestMap';
 
 const INTAKE_ENDPOINT = process.env.REACT_APP_INTAKE_ENDPOINT || '';
@@ -183,7 +183,7 @@ export default function VictaSecuritySolutions() {
               Strategic Security Consulting for Communities & Organizations
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl">
-              Assessment-first approach to physical security, threat mitigation, and technology implementation. We identify risks others miss and recommend solutions — including certified ballistic protection products — tailored to your reality, not our inventory.
+              Assessment-first approach to physical security, threat mitigation, and certified hardening. We identify risks others miss and recommend solutions — including ballistic protection products — tailored to your reality, not our inventory.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
@@ -220,13 +220,13 @@ export default function VictaSecuritySolutions() {
                 step: "02",
                 title: "Custom Recommendations",
                 description:
-                  "Based on what we find, we recommend solutions from the full spectrum: physical hardening, certified ballistic products, technology implementation, process improvements, or vendor partnerships.",
+                  "Based on what we find, we recommend solutions from the full spectrum: physical hardening, certified ballistic products, process improvements, or vendor partnerships.",
               },
               {
                 step: "03",
                 title: "Strategic Implementation",
                 description:
-                  "Whether we implement directly or guide you through vendor selection, we ensure solutions actually solve your problem and integrate cleanly.",
+                  "Whether we harden the facility directly or guide you through vendor selection, we ensure solutions actually solve your problem and fit how the site operates.",
               },
             ].map((item, idx) => (
               <div key={idx} className="space-y-4">
@@ -244,10 +244,10 @@ export default function VictaSecuritySolutions() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-4">Services</h2>
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
-            We combine expertise across physical security, enterprise software, and community strategy to deliver comprehensive solutions.
+            We combine expertise across physical security, certified hardening, and community strategy to deliver comprehensive solutions.
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: Shield,
@@ -257,16 +257,6 @@ export default function VictaSecuritySolutions() {
                   "Physical hardening recommendations (glazing, perimeter, access control)",
                   "Certified Clear-Armor laminate & ballistic board installation",
                   "Compliance readiness (NIJ, GSA, CMMC, ANSI, UL 752)",
-                ],
-              },
-              {
-                icon: Lightbulb,
-                title: "SaaS Implementation & Advisory",
-                items: [
-                  "System implementation and configuration",
-                  "Software procurement guidance",
-                  "Change management and adoption support",
-                  "Integration and custom solutions",
                 ],
               },
               {
@@ -284,9 +274,9 @@ export default function VictaSecuritySolutions() {
                 title: "Strategic Consulting",
                 items: [
                   "Long-term security roadmapping",
+                  "Evaluate AI-enabled security products with clear eyes",
                   "Vendor selection and RFP support",
-                  "Budget and feasibility planning",
-                  "Ongoing advisory relationship",
+                  "Budget, feasibility, and ongoing advisory",
                 ],
               },
             ].map((service, idx) => {
@@ -375,7 +365,7 @@ export default function VictaSecuritySolutions() {
               Victa sits at the cutting edge of technology, people, and policy so you do not. We help you evaluate AI-enabled security products with clear eyes, harden the human and process layers attackers still exploit, and align recommendations with the policies and compliance reality your organization actually operates in.
             </p>
             <p>
-              With 18 years in SaaS implementation, customer success, and enterprise sales engineering, I bring a solution-driven approach — not a product pitch. I assess what you need and recommend the best path forward: direct services, certified physical hardening, modern systems, or process improvement. I specialize in government agencies, municipal facilities, schools, and corporate organizations where security is non-negotiable and risk tolerance is low.
+              With 18 years in customer success and enterprise sales engineering, I bring a solution-driven approach — not a product pitch. I assess what you need and recommend the best path forward: certified physical hardening, security systems, or process improvement. I specialize in government agencies, municipal facilities, schools, and corporate organizations where security is non-negotiable and risk tolerance is low.
             </p>
             <div className="pt-4 border-t border-slate-700">
               <p className="text-sm text-slate-400">
@@ -556,9 +546,12 @@ export default function VictaSecuritySolutions() {
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
             <p>&copy; 2026 Victa Security Solutions. All rights reserved.</p>
             <p>
-              Specializing in <strong>Physical Security</strong> + <strong>SaaS Implementation</strong> + <strong>Community Strategy</strong>
+              Specializing in <strong>Physical Security</strong> + <strong>Certified Hardening</strong> + <strong>Community Strategy</strong>
             </p>
           </div>
+          <p className="mt-6 text-center text-slate-500 text-xs tracking-wide">
+            Built by Humans Using AI to Further Human Achievements
+          </p>
         </div>
       </footer>
 

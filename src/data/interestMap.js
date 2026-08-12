@@ -5,7 +5,6 @@
  *
  * Confirmed in Drive (Victa Security - Intake Forms folder):
  * - Intake Form - Physical Security Assessment
- * - Intake Form - SaaS Implementation
  * - Intake Form - Security Laminate / Glass Hardening
  * - Intake Form - Ballistic Panels
  * - Intake Form - Multiple Services
@@ -18,12 +17,6 @@ export const INTEREST_OPTIONS = [
     slug: 'physical-security-assessment',
     docTitle: 'Intake Form - Physical Security Assessment',
     discoveryLabel: 'Physical Security Assessment',
-  },
-  {
-    label: 'SaaS Implementation',
-    slug: 'saas-implementation',
-    docTitle: 'Intake Form - SaaS Implementation',
-    discoveryLabel: 'SaaS / Security System Implementation',
   },
   {
     label: 'Security Laminate / Glass Hardening',

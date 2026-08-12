@@ -33,11 +33,6 @@ const INTEREST_TEMPLATES = [
     docTitle: 'Intake Form - Physical Security Assessment',
   },
   {
-    label: 'SaaS Implementation',
-    slug: 'saas-implementation',
-    docTitle: 'Intake Form - SaaS Implementation',
-  },
-  {
     label: 'Security Laminate / Glass Hardening',
     slug: 'security-laminate',
     docTitle: 'Intake Form - Security Laminate / Glass Hardening',

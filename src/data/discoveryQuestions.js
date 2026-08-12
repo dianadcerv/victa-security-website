@@ -41,7 +41,7 @@ export const discoverySections = [
       { id: 'perimeterGlazing', label: 'Perimeter / Glazing / Windows', type: 'textarea', required: false, placeholder: 'Glass type, film, bollards, fencing', rows: 2 },
       { id: 'securityStaff', label: 'Security Staff / Guards', type: 'textarea', required: false, placeholder: 'In-house, contracted, hours of coverage', rows: 2 },
       { id: 'alarmMonitoring', label: 'Alarm / Monitoring / Response', type: 'textarea', required: false, placeholder: 'Intrusion, panic buttons, central station', rows: 2 },
-      { id: 'securitySoftware', label: 'Security-Related Software / SaaS', type: 'textarea', required: false, placeholder: 'VMS, visitor management, incident reporting, etc.', rows: 2 },
+      { id: 'securitySoftware', label: 'Security Systems Already in Place', type: 'textarea', required: false, placeholder: 'VMS, visitor management, incident reporting, access platforms', rows: 2 },
       { id: 'complianceRequirements', label: 'Compliance or Standards Requirements', type: 'textarea', required: false, placeholder: 'CMMC, UL 752, internal policies, insurance requirements', rows: 2 },
     ],
   },
@@ -60,7 +60,7 @@ export const discoverySections = [
     title: 'Goals & Discovery Session',
     description: 'What do you want to accomplish, and by when?',
     fields: [
-      { id: 'primaryInterest', label: 'Primary Interest', type: 'select', required: true, options: ['Physical Security Assessment', 'Strategic Security Consulting', 'Security Laminate / Glass Hardening', 'Ballistic Panels / Safe Rooms', 'SaaS / Security System Implementation', 'Vendor Selection / RFP Support', 'Multiple Services', 'Not sure yet'] },
+      { id: 'primaryInterest', label: 'Primary Interest', type: 'select', required: true, options: ['Physical Security Assessment', 'Strategic Security Consulting', 'Security Laminate / Glass Hardening', 'Ballistic Panels / Safe Rooms', 'Vendor Selection / RFP Support', 'Multiple Services', 'Not sure yet'] },
       { id: 'sessionGoals', label: 'Goals for Our Discovery Session', type: 'textarea', required: true, placeholder: 'What would make this session a success for you?', rows: 3 },
       { id: 'timeline', label: 'Desired Timeline', type: 'select', required: true, options: ['Urgent - within 30 days', '1-3 months', '3-6 months', '6+ months / planning phase', 'Exploratory - no fixed timeline'] },
       { id: 'budgetRange', label: 'Budget Range (Optional)', type: 'select', required: false, options: ['Under $25,000', '$25,000 - $100,000', '$100,000 - $500,000', '$500,000+', 'Not established yet', 'Prefer not to say'] },
