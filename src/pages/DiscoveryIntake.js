@@ -170,7 +170,7 @@ export default function DiscoveryIntake() {
       setSubmitted(true);
     } catch (submitError) {
       console.error(submitError);
-      setError('There was a problem submitting the form. Please try again or email us directly.');
+      setError('There was a problem submitting the form. Please try again or email me directly.');
     } finally {
       setSubmitting(false);
     }
@@ -185,9 +185,9 @@ export default function DiscoveryIntake() {
             <CheckCircle className="mx-auto text-amber-500" size={56} />
             <h1 className="text-4xl font-bold">Thank You</h1>
             <p className="text-lg text-slate-300">
-              Your discovery intake has been received. We will review your responses before our session so we can make the most of our time together.
+              Your discovery intake has been received. I will review your responses before our session so I can make the most of our time together.
             </p>
-            <p className="text-slate-400">If anything changes before we meet, reply to your scheduling email and we will update our notes.</p>
+            <p className="text-slate-400">If anything changes before we meet, reply to your scheduling email and I will update my notes.</p>
           </div>
         </main>
       </div>
@@ -208,7 +208,7 @@ export default function DiscoveryIntake() {
               </p>
             )}
             <p className="text-lg text-slate-300">
-              Please complete this form before our discovery session. Your answers help us understand your environment, risks, and goals so we can focus on what matters most.
+              Please complete this form before our discovery session. Your answers help me understand your environment, risks, and goals so I can focus on what matters most.
             </p>
             <p className="text-sm text-slate-400">
               Estimated time: 10-15 minutes. Fields marked with * are required.
@@ -263,7 +263,7 @@ export default function DiscoveryIntake() {
                 <p className="text-xs text-slate-500 mt-3">
                   {totalFields} fields across {sections.length} sections
                   {schemaSource === 'fallback' && interestSlug
-                    ? ' (built-in fallback — sync Google Docs if this looks wrong)'
+                    ? ' (built-in fallback. Sync Google Docs if this looks wrong)'
                     : ''}
                 </p>
               </div>

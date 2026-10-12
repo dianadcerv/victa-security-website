@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, X, ChevronRight, Shield, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import { INTEREST_OPTIONS } from './data/interestMap';
 
@@ -17,12 +17,18 @@ function isGoogleAppsScriptUrl(url) {
   return url.includes('script.google.com');
 }
 
+// Set to true to publish the Clear-Armor catalog. Product copy below is the
+// previous presentation, with no Victus Defense affiliation.
+const SHOW_PRODUCTS = false;
+const PRODUCTS_META =
+  'Victa Security Solutions LLC: strategic, assessment-first physical security consulting, threat mitigation, and certified Clear-Armor ballistic protection for schools, companies, and municipalities.';
+
 const products = [
   {
     name: "SL-15 Security Laminate",
     tagline: "Forced Entry & Shooter Deterrence",
     description:
-      "15-mil transparent laminate that holds glass in place under repeated impact, buying critical time for first responders. Shot through multiple times without collapsing. Optically clear — no visible change to your facility.",
+      "15-mil transparent laminate that holds glass in place under repeated impact, buying critical time for first responders. Shot through multiple times without collapsing. Optically clear, with no visible change to your facility.",
     specs: ["15 mil | 420 psi break strength", "87% visible light transmitted | 99% UV rejection", "5-year material / 10-year installation warranty"],
     certifications: ["ANSI Z97.1", "BMAG Level 1", "CPSC 16 CFR", "ASTM E84", "ULC S332-93"],
     bestFor: ["Schools & universities", "Retail & commercial", "Municipal offices"],
@@ -31,25 +37,25 @@ const products = [
     name: "SL-31 Riot Laminate",
     tagline: "Riot & Prolonged Targeted Attack",
     description:
-      "World-patented 31-mil laminate engineered for sustained, high-force attacks and crowd riots. 2.6× the break strength of SL-15 — designed for high-value facilities where standard deterrence isn't enough.",
+      "World-patented 31-mil laminate engineered for sustained, high-force attacks and crowd riots. 2.6× the break strength of SL-15, designed for high-value facilities where standard deterrence isn't enough.",
     specs: ["31 mil | 1,100 psi break strength", "87% visible light transmitted | Optically clear", "5-year material / 10-year installation warranty"],
     certifications: ["ANSI Z97.1", "BMAG Level 1", "ASTM E84", "Hospital Safety Compliance", "ULC S332-93"],
-    bestFor: ["Government buildings", "Financial institutions", "Healthcare facilities"],
+    bestFor: ["Companies", "Municipal facilities", "Healthcare facilities"],
   },
   {
     name: "BR Bullet-Resistant Laminate",
     tagline: "One-Way Bullet Resistant",
     description:
-      "Transforms existing glass into a one-way ballistic shield — stops incoming rounds while allowing response from inside. Third-party verified. GSA Level 1 & 2 certified for federal facility compliance.",
-    specs: ["Variable thickness | 1,500+ psi break strength", "Optically clear | 3rd-party independently verified", "GSA Level 1 & 2 — federal facility eligible"],
+      "Transforms existing glass into a one-way ballistic shield. It stops incoming rounds while allowing response from inside. Third-party verified. GSA Level 1 & 2 certified for federal facility compliance.",
+    specs: ["Variable thickness | 1,500+ psi break strength", "Optically clear | 3rd-party independently verified", "GSA Level 1 & 2, federal facility eligible"],
     certifications: ["UL 752", "GSA Level 1 & 2", "BMAG Level 1", "CPSC 16 CFR", "ANSI Z97.1"],
-    bestFor: ["Federal & government facilities", "Law enforcement", "Secure command centers"],
+    bestFor: ["Schools", "Companies", "Municipal facilities"],
   },
   {
     name: "Flex-Board Ballistic Panels",
     tagline: "NIJ-Rated Rigid Armor",
     description:
-      "Flexible, curvable ballistic boards for retrofitting doors, desks, walls, and safe rooms. No structural renovation required — installs in 1–2 hours per door. Zero ricochet. Independently tested at NTS Labs.",
+      "Flexible, curvable ballistic boards for retrofitting doors, desks, walls, and safe rooms. No structural renovation required. Installs in 1-2 hours per door. Zero ricochet. Independently tested at NTS Labs.",
     specs: ["NIJ IIIA (handguns) & NIJ III (rifles)", "1.7–3.2 lbs/sqft | No ricochet", "1–2 hrs install per door | No retrofitting required"],
     certifications: ["NIJ-STD-0108.01", "NTS Labs Tested", "GSA Level 1 & 2", "UL 752 Level III", "BMAG Level 1"],
     bestFor: ["Safe rooms & panic rooms", "Reception desks", "School classrooms"],
@@ -69,6 +75,12 @@ export default function VictaSecuritySolutions() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
+
+  useEffect(() => {
+    if (!SHOW_PRODUCTS) return;
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute('content', PRODUCTS_META);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -149,7 +161,9 @@ export default function VictaSecuritySolutions() {
           <div className="hidden md:flex gap-8">
             <a href="#approach" className="text-slate-300 hover:text-amber-500 transition">Approach</a>
             <a href="#services" className="text-slate-300 hover:text-amber-500 transition">Services</a>
-            <a href="#products" className="text-slate-300 hover:text-amber-500 transition">Products</a>
+            {SHOW_PRODUCTS && (
+              <a href="#products" className="text-slate-300 hover:text-amber-500 transition">Products</a>
+            )}
             <a href="#about" className="text-slate-300 hover:text-amber-500 transition">About</a>
             <button
               onClick={() => setConsultationOpen(true)}
@@ -163,7 +177,9 @@ export default function VictaSecuritySolutions() {
           <div className="md:hidden bg-slate-900 border-t border-slate-800 p-6 space-y-4">
             <a href="#approach" className="block text-slate-300 hover:text-amber-500">Approach</a>
             <a href="#services" className="block text-slate-300 hover:text-amber-500">Services</a>
-            <a href="#products" className="block text-slate-300 hover:text-amber-500">Products</a>
+            {SHOW_PRODUCTS && (
+              <a href="#products" className="block text-slate-300 hover:text-amber-500">Products</a>
+            )}
             <a href="#about" className="block text-slate-300 hover:text-amber-500">About</a>
             <button
               onClick={() => { setConsultationOpen(true); setMenuOpen(false); }}
@@ -180,10 +196,12 @@ export default function VictaSecuritySolutions() {
         <div className="max-w-4xl mx-auto">
           <div className="space-y-6 animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight">
-              Strategic Security Consulting for Communities & Organizations
+              Strategic Security Consulting for Schools, Companies, and Municipalities
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl">
-              Assessment-first approach to physical security, threat mitigation, and certified hardening. We identify risks others miss and recommend solutions — including ballistic protection products — tailored to your reality, not our inventory.
+              {SHOW_PRODUCTS
+                ? 'Assessment-first physical security, threat mitigation, and certified hardening. I identify risks others miss and recommend solutions, including ballistic protection products, tailored to your reality, not my inventory.'
+                : 'Assessment-first physical security and threat mitigation. I identify risks others miss and recommend solutions tailored to how you actually operate.'}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <button
@@ -197,7 +215,7 @@ export default function VictaSecuritySolutions() {
                 href="#approach"
                 className="px-6 py-3 border border-slate-700 rounded-lg font-semibold text-slate-300 hover:border-amber-500 hover:text-amber-500 transition"
               >
-                How We Work
+                How I Work
               </a>
             </div>
           </div>
@@ -214,19 +232,21 @@ export default function VictaSecuritySolutions() {
                 step: "01",
                 title: "Deep Dive Assessment",
                 description:
-                  "We evaluate your physical layout, threat profile, existing systems, and operational constraints. No assumptions, no sales pitch, just thorough analysis.",
+                  "I evaluate your physical layout, threat profile, existing systems, and operational constraints. No assumptions, no sales pitch, just thorough analysis.",
               },
               {
                 step: "02",
                 title: "Custom Recommendations",
-                description:
-                  "Based on what we find, we recommend solutions from the full spectrum: physical hardening, certified ballistic products, process improvements, or vendor partnerships.",
+                description: SHOW_PRODUCTS
+                  ? "Based on what I find, I recommend solutions from the full spectrum: physical hardening, certified ballistic products, process improvements, or vendor partnerships."
+                  : "Based on what I find, I recommend solutions from the full spectrum: physical hardening, process improvements, or an independent vendor match.",
               },
               {
                 step: "03",
-                title: "Strategic Implementation",
-                description:
-                  "Whether we harden the facility directly or guide you through vendor selection, we ensure solutions actually solve your problem and fit how the site operates.",
+                title: SHOW_PRODUCTS ? "Strategic Implementation" : "Guided Next Steps",
+                description: SHOW_PRODUCTS
+                  ? "Whether I harden the facility directly or guide you through vendor selection, I make sure the solution actually solves your problem and fits how the site operates."
+                  : "I give you a recommendation you can act on, and help you choose a vendor when you are ready to buy.",
               },
             ].map((item, idx) => (
               <div key={idx} className="space-y-4">
@@ -244,7 +264,9 @@ export default function VictaSecuritySolutions() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-4">Services</h2>
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
-            We combine expertise across physical security, certified hardening, and community strategy to deliver comprehensive solutions.
+            {SHOW_PRODUCTS
+              ? 'I combine physical security, certified hardening, and community strategy for schools, companies, and municipalities.'
+              : 'I work with schools, companies, and municipalities on physical security, threat mitigation, and community strategy. You get recommendations matched to how you operate.'}
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -255,8 +277,9 @@ export default function VictaSecuritySolutions() {
                 items: [
                   "Threat assessments and vulnerability analysis",
                   "Physical hardening recommendations (glazing, perimeter, access control)",
-                  "Certified Clear-Armor laminate & ballistic board installation",
-                  "Compliance readiness (NIJ, GSA, CMMC, ANSI, UL 752)",
+                  SHOW_PRODUCTS
+                    ? "Certified Clear-Armor laminate & ballistic board installation"
+                    : "Hardening recommendations matched to the threat and how the building is used",
                 ],
               },
               {
@@ -300,7 +323,7 @@ export default function VictaSecuritySolutions() {
         </div>
       </section>
 
-      {/* Products */}
+      {SHOW_PRODUCTS && (
       <section id="products" className="py-20 px-6 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-500 text-sm font-semibold">
@@ -308,7 +331,7 @@ export default function VictaSecuritySolutions() {
           </div>
           <h2 className="text-4xl font-bold mb-4">Ballistic Protection Products</h2>
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
-            As a certified seller of Clear-Armor LLC's patented product line through our partnership with Victus Defense LLC, we offer independently tested, patent-protected solutions for every threat level — from forced-entry deterrence to GSA-certified bullet-resistant installations.
+            As a certified seller of Clear-Armor LLC&apos;s patented product line, I offer independently tested, patent-protected solutions for every threat level, from forced-entry deterrence to bullet-resistant installations.
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -348,10 +371,11 @@ export default function VictaSecuritySolutions() {
             ))}
           </div>
           <p className="mt-10 text-sm text-slate-500 text-center">
-            All Clear-Armor products are independently tested by NTS Technical Systems and carry a 5-year material / 10-year installation warranty. DUNS & CAGE numbers available for government procurement.
+            All Clear-Armor products are independently tested by NTS Technical Systems and carry a 5-year material / 10-year installation warranty.
           </p>
         </div>
       </section>
+      )}
 
       {/* About */}
       <section id="about" className="py-20 px-6">
@@ -359,19 +383,44 @@ export default function VictaSecuritySolutions() {
           <h2 className="text-4xl font-bold mb-8">Why Victa Security</h2>
           <div className="space-y-6 text-lg text-slate-300">
             <p>
-              AI is moving into every part of how we live and work — including how we protect people and facilities, and how those with malicious intent probe for weakness. Detection systems, access platforms, and decision tools are getting smarter; so are social engineering, deepfakes, and automated attacks. That gap is where organizations get left behind.
+              Victa is Latin, from <em>vincere</em>, to overcome. The same root named Victoria, victory, and <em>victrix</em>, a woman who prevails. Victa is the feminine word for the one an attack is meant to defeat. That is who I show up for. I work so a school, a company, or a municipality is still standing, with people, equipment, and facility intact, and able to keep growing.
             </p>
             <p>
-              Victa sits at the cutting edge of technology, people, and policy so you do not. We help you evaluate AI-enabled security products with clear eyes, harden the human and process layers attackers still exploit, and align recommendations with the policies and compliance reality your organization actually operates in.
+              AI is moving into every part of how people live and work, including how they protect people and facilities, and how those with malicious intent probe for weakness. Detection systems, access platforms, and decision tools are getting smarter; so are social engineering, deepfakes, and automated attacks. That gap is where organizations get left behind.
             </p>
             <p>
-              With 18 years in customer success and enterprise sales engineering, I bring a solution-driven approach — not a product pitch. I assess what you need and recommend the best path forward: certified physical hardening, security systems, or process improvement. I specialize in government agencies, municipal facilities, schools, and corporate organizations where security is non-negotiable and risk tolerance is low.
+              I stay at the cutting edge of technology, people, and policy so you do not. I help you evaluate AI-enabled security products with clear eyes, harden the human and process layers attackers still exploit, and align recommendations with the policies your organization actually operates in.
             </p>
-            <div className="pt-4 border-t border-slate-700">
-              <p className="text-sm text-slate-400">
-                <strong>Note:</strong> As a certified seller of Clear-Armor LLC — the patent-holding manufacturer behind the glass laminate and ballistic panel products above — through our partnership with Victus Defense LLC, every product recommendation comes backed by four U.S. patents, independent third-party testing (NTS Technical Systems), and a 10-year installation warranty. You get strategic guidance and certified product expertise under one roof.
-              </p>
-            </div>
+            <p>
+              {SHOW_PRODUCTS
+                ? 'With 18 years in customer success and enterprise sales engineering, I bring a solution-driven approach, not a product pitch. I assess what you need and recommend the best path forward: certified physical hardening, security systems, or process improvement. I work with schools, companies, and municipal facilities where security is non-negotiable and risk tolerance is low.'
+                : 'With 18 years in customer success and enterprise sales engineering, I bring a solution-driven approach, not a product pitch. I assess what you need and recommend the best path forward: physical hardening, security systems, or process improvement. I work with schools, companies, and municipal facilities where security is non-negotiable and risk tolerance is low.'}
+            </p>
+            <p>
+              I have relationships with cybersecurity experts, physical monitoring experts, and perimeter protection experts. Together with their expertise, I can support you in protecting your people, equipment, and facility so you can keep growing.
+            </p>
+            <a
+              href="https://www.credly.com/badges/c06e0b61-f404-4d6f-88cb-b84a3cb9303d/public_url"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-4 text-base text-slate-300 hover:text-amber-400 transition"
+            >
+              <img
+                src="/images/asis-member.png"
+                alt="ASIS International Member badge"
+                width={120}
+                height={120}
+                className="h-24 w-24 object-contain"
+              />
+              <span>ASIS International member. Verify on Credly.</span>
+            </a>
+            {SHOW_PRODUCTS && (
+              <div className="pt-4 border-t border-slate-700">
+                <p className="text-sm text-slate-400">
+                  <strong>Note:</strong> As a certified seller of Clear-Armor LLC, the patent-holding manufacturer behind the glass laminate and ballistic panel products above, every product recommendation comes backed by four U.S. patents, independent third-party testing (NTS Technical Systems), and a 10-year installation warranty. You get strategic guidance and certified product expertise under one roof.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -522,14 +571,16 @@ export default function VictaSecuritySolutions() {
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
               <img src="/images/logo.png" alt="Victa Security Solutions LLC" className="h-28 w-auto mb-4" />
-              <p className="text-slate-400">Strategic security consulting for communities and organizations.</p>
+              <p className="text-slate-400">Strategic security consulting for schools, companies, and municipalities.</p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="#approach" className="hover:text-amber-500 transition">Our Approach</a></li>
+                <li><a href="#approach" className="hover:text-amber-500 transition">My Approach</a></li>
                 <li><a href="#services" className="hover:text-amber-500 transition">Services</a></li>
-                <li><a href="#products" className="hover:text-amber-500 transition">Products</a></li>
+                {SHOW_PRODUCTS && (
+                  <li><a href="#products" className="hover:text-amber-500 transition">Products</a></li>
+                )}
                 <li><a href="#about" className="hover:text-amber-500 transition">About</a></li>
               </ul>
             </div>
@@ -546,7 +597,7 @@ export default function VictaSecuritySolutions() {
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
             <p>&copy; 2026 Victa Security Solutions. All rights reserved.</p>
             <p>
-              Specializing in <strong>Physical Security</strong> + <strong>Certified Hardening</strong> + <strong>Community Strategy</strong>
+              Specializing in <strong>Physical Security</strong> + <strong>{SHOW_PRODUCTS ? 'Certified Hardening' : 'Threat Mitigation'}</strong> + <strong>Community Strategy</strong>
             </p>
           </div>
           <p className="mt-6 text-center text-slate-500 text-xs tracking-wide">

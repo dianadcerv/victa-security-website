@@ -5,10 +5,12 @@
  *
  * Confirmed in Drive (Victa Security - Intake Forms folder):
  * - Intake Form - Physical Security Assessment
- * - Intake Form - Security Laminate / Glass Hardening
- * - Intake Form - Ballistic Panels
  * - Intake Form - Multiple Services
  * - Intake Form - General  (maps to "Other")
+ *
+ * Off the public form until product offerings return:
+ * - Intake Form - Security Laminate / Glass Hardening
+ * - Intake Form - Ballistic Panels
  */
 
 export const INTEREST_OPTIONS = [
@@ -17,18 +19,6 @@ export const INTEREST_OPTIONS = [
     slug: 'physical-security-assessment',
     docTitle: 'Intake Form - Physical Security Assessment',
     discoveryLabel: 'Physical Security Assessment',
-  },
-  {
-    label: 'Security Laminate / Glass Hardening',
-    slug: 'security-laminate',
-    docTitle: 'Intake Form - Security Laminate / Glass Hardening',
-    discoveryLabel: 'Security Laminate / Glass Hardening',
-  },
-  {
-    label: 'Ballistic Panels',
-    slug: 'ballistic-panels',
-    docTitle: 'Intake Form - Ballistic Panels',
-    discoveryLabel: 'Ballistic Panels / Safe Rooms',
   },
   {
     label: 'Multiple Services',

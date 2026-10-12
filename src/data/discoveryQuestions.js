@@ -9,7 +9,7 @@ export const discoverySections = [
     description: 'Basic information about your organization and primary contact.',
     fields: [
       { id: 'organization', label: 'Organization Name', type: 'text', required: true, placeholder: 'Company or facility name' },
-      { id: 'industry', label: 'Industry', type: 'select', required: true, options: ['Corporate / Commercial', 'Manufacturing / Industrial', 'Financial Services', 'Healthcare', 'Education', 'Government / Municipal', 'Nonprofit', 'Other'] },
+      { id: 'industry', label: 'Industry', type: 'select', required: true, options: ['Education', 'Corporate / Commercial', 'Municipal', 'Manufacturing / Industrial', 'Financial Services', 'Healthcare', 'Nonprofit', 'Other'] },
       { id: 'employeeCount', label: 'Approximate Employee Count', type: 'select', required: true, options: ['Under 50', '50-200', '200-1,000', '1,000+'] },
       { id: 'facilityCount', label: 'Number of Facilities / Locations', type: 'text', required: true, placeholder: 'e.g. 1 headquarters, 3 regional offices' },
       { id: 'contactName', label: 'Primary Contact Name', type: 'text', required: true, placeholder: 'Full name' },
@@ -22,10 +22,10 @@ export const discoverySections = [
   {
     id: 'facilities',
     title: 'Facilities & Operations',
-    description: 'Help us understand your physical environment and how it operates.',
+    description: 'Help me understand your physical environment and how it operates.',
     fields: [
       { id: 'primaryLocation', label: 'Primary Location Address', type: 'text', required: true, placeholder: 'City, state or full address' },
-      { id: 'buildingType', label: 'Building Type', type: 'select', required: true, options: ['Office / Corporate HQ', 'Retail / Customer-facing', 'Warehouse / Distribution', 'Mixed-use', 'Campus (multiple buildings)', 'Other'] },
+      { id: 'buildingType', label: 'Building Type', type: 'select', required: true, options: ['School', 'Office / Corporate HQ', 'Municipal facility', 'Retail / Customer-facing', 'Warehouse / Distribution', 'Mixed-use', 'Campus (multiple buildings)', 'Other'] },
       { id: 'publicAccess', label: 'Public / Visitor Access', type: 'select', required: true, options: ['Minimal - employees and vendors only', 'Moderate - scheduled visitors, reception desk', 'High - open to public during business hours', 'Varies by location'] },
       { id: 'operatingHours', label: 'Operating Hours', type: 'text', required: true, placeholder: 'e.g. Mon-Fri 7am-7pm' },
       { id: 'facilityDescription', label: 'Facility Layout & Notable Areas', type: 'textarea', required: false, placeholder: 'Reception, executive floors, server rooms, loading docks, parking, etc.', rows: 4 },
@@ -42,7 +42,7 @@ export const discoverySections = [
       { id: 'securityStaff', label: 'Security Staff / Guards', type: 'textarea', required: false, placeholder: 'In-house, contracted, hours of coverage', rows: 2 },
       { id: 'alarmMonitoring', label: 'Alarm / Monitoring / Response', type: 'textarea', required: false, placeholder: 'Intrusion, panic buttons, central station', rows: 2 },
       { id: 'securitySoftware', label: 'Security Systems Already in Place', type: 'textarea', required: false, placeholder: 'VMS, visitor management, incident reporting, access platforms', rows: 2 },
-      { id: 'complianceRequirements', label: 'Compliance or Standards Requirements', type: 'textarea', required: false, placeholder: 'CMMC, UL 752, internal policies, insurance requirements', rows: 2 },
+      { id: 'complianceRequirements', label: 'Compliance or Standards Requirements', type: 'textarea', required: false, placeholder: 'Internal policies, insurance requirements, or standards you must meet', rows: 2 },
     ],
   },
   {
@@ -60,11 +60,11 @@ export const discoverySections = [
     title: 'Goals & Discovery Session',
     description: 'What do you want to accomplish, and by when?',
     fields: [
-      { id: 'primaryInterest', label: 'Primary Interest', type: 'select', required: true, options: ['Physical Security Assessment', 'Strategic Security Consulting', 'Security Laminate / Glass Hardening', 'Ballistic Panels / Safe Rooms', 'Vendor Selection / RFP Support', 'Multiple Services', 'Not sure yet'] },
-      { id: 'sessionGoals', label: 'Goals for Our Discovery Session', type: 'textarea', required: true, placeholder: 'What would make this session a success for you?', rows: 3 },
+      { id: 'primaryInterest', label: 'Primary Interest', type: 'select', required: true, options: ['Physical Security Assessment', 'Strategic Security Consulting', 'Vendor Selection / RFP Support', 'Multiple Services', 'Not sure yet'] },
+      { id: 'sessionGoals', label: 'Goals for This Discovery Session', type: 'textarea', required: true, placeholder: 'What would make this session a success for you?', rows: 3 },
       { id: 'timeline', label: 'Desired Timeline', type: 'select', required: true, options: ['Urgent - within 30 days', '1-3 months', '3-6 months', '6+ months / planning phase', 'Exploratory - no fixed timeline'] },
       { id: 'budgetRange', label: 'Budget Range (Optional)', type: 'select', required: false, options: ['Under $25,000', '$25,000 - $100,000', '$100,000 - $500,000', '$500,000+', 'Not established yet', 'Prefer not to say'] },
-      { id: 'additionalNotes', label: 'Anything Else We Should Know', type: 'textarea', required: false, placeholder: 'Constraints, past vendor experiences, specific areas to focus on', rows: 4 },
+      { id: 'additionalNotes', label: 'Anything Else I Should Know', type: 'textarea', required: false, placeholder: 'Constraints, past vendor experiences, specific areas to focus on', rows: 4 },
     ],
   },
 ];
