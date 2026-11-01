@@ -11,6 +11,11 @@ const TRUARMOR_DEMO_VIDEOS = [
     title: 'TruArmor product demo',
     youtubeWatchUrl: 'https://www.youtube.com/watch?v=125SEEQhkXs',
   },
+  {
+    id: '_thpfmucbGo',
+    title: 'TruArmor vehicle demo',
+    youtubeWatchUrl: 'https://www.youtube.com/watch?v=_thpfmucbGo',
+  },
 ];
 
 const qualities = [
