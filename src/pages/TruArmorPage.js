@@ -2,7 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
 import PageMeta from '../components/PageMeta';
+import YouTubeDemoSection from '../components/YouTubeDemoSection';
 import { useConsultation } from '../context/ConsultationContext';
+
+const TRUARMOR_DEMO_VIDEOS = [
+  {
+    id: '125SEEQhkXs',
+    title: 'TruArmor product demo',
+    youtubeWatchUrl: 'https://www.youtube.com/watch?v=125SEEQhkXs',
+  },
+];
 
 const qualities = [
   'DOT certified',
@@ -94,19 +103,7 @@ export default function TruArmorPage() {
         </div>
       </section>
 
-      <section className="py-16 px-6 bg-slate-900/50 border-t border-slate-800">
-        <div className="max-w-6xl mx-auto space-y-4">
-          <h2 className="text-3xl font-bold">See it in action</h2>
-          <p className="text-slate-400 max-w-2xl">
-            A TruArmor vehicle demo will be added here once a TruArmor-specific video is confirmed. For the official
-            Clear-Armor product demo, see{' '}
-            <Link to="/clear-armor" className="text-amber-500 hover:text-amber-400">
-              Clear-Armor laminates
-            </Link>
-            .
-          </p>
-        </div>
-      </section>
+      <YouTubeDemoSection videos={TRUARMOR_DEMO_VIDEOS} />
 
       <section className="py-16 px-6 bg-slate-900/50">
         <div className="max-w-4xl mx-auto bg-amber-500/10 border border-amber-500/30 rounded-lg p-10 text-center space-y-4">
