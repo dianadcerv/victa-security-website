@@ -5,17 +5,11 @@ import PageMeta from '../components/PageMeta';
 import YouTubeDemoSection from '../components/YouTubeDemoSection';
 import { useConsultation } from '../context/ConsultationContext';
 
-/** TODO: Diana to confirm official Clear-Armor YouTube demo IDs and watch URLs */
 const CLEAR_ARMOR_DEMO_VIDEOS = [
   {
-    id: null,
-    title: 'Clear-Armor laminate demo (primary)',
-    youtubeWatchUrl: null,
-  },
-  {
-    id: null,
-    title: 'Clear-Armor laminate demo (secondary)',
-    youtubeWatchUrl: null,
+    id: '6xfkRtR4SZU',
+    title: 'Clear-Armor product demo',
+    youtubeWatchUrl: 'https://www.youtube.com/watch?v=6xfkRtR4SZU',
   },
 ];
 
@@ -218,10 +212,7 @@ export default function ClearArmorPage() {
         </div>
       </section>
 
-      <YouTubeDemoSection
-        videos={CLEAR_ARMOR_DEMO_VIDEOS}
-        note="Manufacturer demo videos will be embedded here once Diana confirms the official Clear-Armor YouTube links."
-      />
+      <YouTubeDemoSection videos={CLEAR_ARMOR_DEMO_VIDEOS} />
 
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto bg-amber-500/10 border border-amber-500/30 rounded-lg p-10 text-center space-y-4">
