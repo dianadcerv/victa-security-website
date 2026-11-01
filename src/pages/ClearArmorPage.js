@@ -11,6 +11,11 @@ const CLEAR_ARMOR_DEMO_VIDEOS = [
     title: 'Clear-Armor product demo',
     youtubeWatchUrl: 'https://www.youtube.com/watch?v=6xfkRtR4SZU',
   },
+  {
+    id: 'yWmXRAO3GlY',
+    title: 'School testimonial',
+    youtubeWatchUrl: 'https://www.youtube.com/watch?v=yWmXRAO3GlY',
+  },
 ];
 
 const laminates = [
