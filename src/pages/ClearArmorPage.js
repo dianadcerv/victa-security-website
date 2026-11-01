@@ -90,11 +90,7 @@ export default function ClearArmorPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-500 text-sm font-semibold">
             Official Clear-Armor Ambassador
           </div>
-          <img
-            src="/images/clear-armor-logo.png"
-            alt="Clear-Armor: Transforming glass into armor"
-            className="max-w-md w-full h-auto"
-          />
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Clear-Armor Security Laminates</h1>
           <p className="text-xl text-slate-300 max-w-3xl leading-relaxed">
             Clear-Armor LLC transforms your glass into armor with globally patented security laminates that work 24/7,
             with or without power. As an official ambassador, Victa Security Solutions helps you assess fit, coordinate
