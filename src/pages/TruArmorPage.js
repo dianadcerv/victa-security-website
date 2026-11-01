@@ -94,11 +94,6 @@ export default function TruArmorPage() {
                 </li>
               ))}
             </ul>
-            <img
-              src="/images/clear-armor-logo.png"
-              alt="Clear-Armor brand"
-              className="max-w-xs w-full h-auto opacity-90 pt-4"
-            />
           </div>
         </div>
       </section>
