@@ -69,15 +69,21 @@ export default function HomePage() {
                 Victa leads with assessment; Clear-Armor remains the manufacturer.
               </p>
             </div>
-            <img
-              src="/images/victa-official-ambassador.png"
-              alt="Victa Official Ambassador"
-              className="h-24 w-auto object-contain"
-            />
+            <div
+              className="inline-flex flex-col items-start rounded-lg border border-amber-500/40 bg-slate-950/80 px-4 py-3 text-left"
+              aria-label="Victa Official Ambassador for Clear-Armor and TruArmor"
+            >
+              <span className="text-xs font-semibold uppercase tracking-wide text-amber-500">Victa Official Ambassador</span>
+              <span className="text-sm text-slate-300">Clear-Armor &amp; TruArmor</span>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <article className="p-8 bg-slate-950/60 rounded-lg border border-slate-800 hover:border-amber-500/50 transition flex flex-col gap-4">
-              <img src="/images/clear-armor-logo.png" alt="Clear-Armor logo" className="max-w-[240px] h-auto" />
+              <img
+                src="/images/clear-armor-logo-light.png"
+                alt="Clear-Armor logo"
+                className="max-w-[240px] h-auto"
+              />
               <p className="text-slate-300 flex-grow">
                 Transform existing glass into armor with SL-15, SL-31, and bullet-resistant laminates. Ideal for schools,
                 businesses, and public spaces that need time and deterrence without changing how the building looks.
@@ -169,7 +175,16 @@ export default function HomePage() {
                   'Educational seminars for community leaders',
                   'Best practice documentation and resources',
                   'Custom training programs for staff',
+                  'Through my Clear-Armor partnership, I can connect you to TruTrauma life-safety, critical-skills, and crisis training, including tailored emergency response planning so your personnel are prepared for emergencies',
+                  'Hyperrealistic, immersive scenarios for critical incidents, natural disasters, and active shooter events, blending theory with hands-on exercises',
+                  'STOP THE BLEED® with certified Clear-Armor instructors and a certificate of completion for business owners, corporate teams, schools, healthcare, faith communities, and similar audiences',
+                  'Situational awareness, survivor mentality, and practical strategies for high-stress decision-making',
+                  'Organizations completing the critical life incident course receive a TruTrauma SOS Kit (per Clear-Armor\'s TruTrauma program)',
                 ],
+                learnMore: {
+                  href: 'https://clear-armor.com/pages/trutrauma-crisis-training',
+                  label: 'TruTrauma crisis training at Clear-Armor',
+                },
               },
               {
                 icon: CheckCircle,
@@ -198,6 +213,17 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
+                  {service.learnMore && (
+                    <a
+                      href={service.learnMore.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 transition"
+                    >
+                      {service.learnMore.label}
+                      <ArrowRight size={16} aria-hidden />
+                    </a>
+                  )}
                 </div>
               );
             })}
@@ -217,11 +243,15 @@ export default function HomePage() {
                 height={280}
                 className="w-56 h-56 md:w-64 md:h-64 rounded-full object-cover object-top border-4 border-slate-800 shadow-lg mx-auto"
               />
-              <img
-                src="/images/victa-official-ambassador.png"
-                alt="Victa Official Ambassador for Clear-Armor and TruArmor"
-                className="max-w-[220px] h-auto mx-auto"
-              />
+              <div
+                className="inline-flex flex-col items-center rounded-lg border border-amber-500/40 bg-slate-900/90 px-5 py-4 text-center max-w-[240px] mx-auto"
+                aria-label="Victa Official Ambassador for Clear-Armor and TruArmor"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wide text-amber-500">
+                  Victa Official Ambassador
+                </span>
+                <span className="text-sm text-slate-300 mt-1">Clear-Armor &amp; TruArmor</span>
+              </div>
             </div>
             <div className="space-y-6 text-lg text-slate-300 flex-1">
               <p>
