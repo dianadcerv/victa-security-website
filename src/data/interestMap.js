@@ -7,10 +7,7 @@
  * - Intake Form - Physical Security Assessment
  * - Intake Form - Multiple Services
  * - Intake Form - General  (maps to "Other")
- *
- * Off the public form until product offerings return:
  * - Intake Form - Security Laminate / Glass Hardening
- * - Intake Form - Ballistic Panels
  */
 
 export const INTEREST_OPTIONS = [
@@ -19,6 +16,18 @@ export const INTEREST_OPTIONS = [
     slug: 'physical-security-assessment',
     docTitle: 'Intake Form - Physical Security Assessment',
     discoveryLabel: 'Physical Security Assessment',
+  },
+  {
+    label: 'Security Laminate / Glass Hardening',
+    slug: 'security-laminate-glass-hardening',
+    docTitle: 'Intake Form - Security Laminate / Glass Hardening',
+    discoveryLabel: 'Security Laminate / Glass Hardening',
+  },
+  {
+    label: 'TruArmor Vehicle Protection',
+    slug: 'truarmor-vehicle-protection',
+    docTitle: 'Intake Form - TruArmor Vehicle Protection',
+    discoveryLabel: 'TruArmor Vehicle Protection',
   },
   {
     label: 'Multiple Services',
