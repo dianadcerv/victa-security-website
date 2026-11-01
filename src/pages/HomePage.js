@@ -171,7 +171,7 @@ export default function HomePage() {
                 icon: Users,
                 title: 'Community Outreach & Education',
                 items: [
-                  'Through my Clear-Armor partnership, I can connect you to TruTrauma life-safety, critical-skills, and crisis training, including tailored emergency response planning so your personnel are prepared for emergencies',
+                  'TruTrauma life-safety, critical-skills, and crisis training, including tailored emergency response planning, prepares your personnel for emergencies',
                   'Hyperrealistic, immersive scenarios for critical incidents, natural disasters, and active shooter events, blending theory with hands-on exercises',
                   'STOP THE BLEED® with certified Clear-Armor instructors and a certificate of completion for business owners, corporate teams, schools, healthcare, faith communities, and similar audiences',
                   'Situational awareness, survivor mentality, and practical strategies for high-stress decision-making',
