@@ -156,7 +156,7 @@ export default function HomePage() {
             companies, and municipalities harden their buildings and prepare their people.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
             {[
               {
                 icon: Shield,
@@ -171,11 +171,10 @@ export default function HomePage() {
                 icon: Users,
                 title: 'Community Outreach & Education',
                 items: [
-                  'TruTrauma life-safety, critical-skills, and crisis training, including tailored emergency response planning, prepares your personnel for emergencies',
-                  'Hyperrealistic, immersive scenarios for critical incidents, natural disasters, and active shooter events, blending theory with hands-on exercises',
-                  'STOP THE BLEED® with certified Clear-Armor instructors and a certificate of completion for business owners, corporate teams, schools, healthcare, faith communities, and similar audiences',
-                  'Situational awareness, survivor mentality, and practical strategies for high-stress decision-making',
-                  'Organizations completing the critical life incident course receive a TruTrauma SOS Kit (per Clear-Armor\'s TruTrauma program)',
+                  'TruTrauma life-safety and crisis training with tailored emergency response planning',
+                  'Immersive scenarios for critical incidents, natural disasters, and active shooter events',
+                  'STOP THE BLEED® with certified Clear-Armor instructors',
+                  'Situational awareness and high-stress decision-making',
                 ],
                 learnMore: {
                   href: 'https://clear-armor.com/pages/trutrauma-crisis-training',
@@ -197,11 +196,11 @@ export default function HomePage() {
               return (
                 <div
                   key={service.title}
-                  className="p-8 bg-slate-900/50 rounded-lg border border-slate-800 hover:border-amber-500/50 transition space-y-4"
+                  className="flex h-full flex-col p-8 bg-slate-900/50 rounded-lg border border-slate-800 hover:border-amber-500/50 transition"
                 >
-                  <Icon className="text-amber-500" size={32} />
-                  <h3 className="text-2xl font-semibold">{service.title}</h3>
-                  <ul className="space-y-2">
+                  <Icon className="text-amber-500 mb-4" size={32} />
+                  <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
+                  <ul className="flex-1 space-y-2">
                     {service.items.map((item) => (
                       <li key={item} className="flex gap-3 text-slate-300">
                         <ChevronRight size={18} className="text-amber-500 flex-shrink-0 mt-0.5" />
@@ -214,7 +213,7 @@ export default function HomePage() {
                       href={service.learnMore.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 transition"
+                      className="mt-auto inline-flex items-center gap-2 pt-4 text-sm text-amber-500 hover:text-amber-400 transition"
                     >
                       {service.learnMore.label}
                       <ArrowRight size={16} aria-hidden />
