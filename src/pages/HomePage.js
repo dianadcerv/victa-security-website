@@ -69,15 +69,21 @@ export default function HomePage() {
                 Victa leads with assessment; Clear-Armor remains the manufacturer.
               </p>
             </div>
-            <img
-              src="/images/victa-official-ambassador.png"
-              alt="Victa Official Ambassador"
-              className="h-24 w-auto object-contain"
-            />
+            <div
+              className="inline-flex flex-col items-start rounded-lg border border-amber-500/40 bg-slate-950/80 px-4 py-3 text-left"
+              aria-label="Victa Official Ambassador for Clear-Armor and TruArmor"
+            >
+              <span className="text-xs font-semibold uppercase tracking-wide text-amber-500">Victa Official Ambassador</span>
+              <span className="text-sm text-slate-300">Clear-Armor &amp; TruArmor</span>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             <article className="p-8 bg-slate-950/60 rounded-lg border border-slate-800 hover:border-amber-500/50 transition flex flex-col gap-4">
-              <img src="/images/clear-armor-logo.png" alt="Clear-Armor logo" className="max-w-[240px] h-auto" />
+              <img
+                src="/images/clear-armor-logo-light.png"
+                alt="Clear-Armor logo"
+                className="max-w-[240px] h-auto"
+              />
               <p className="text-slate-300 flex-grow">
                 Transform existing glass into armor with SL-15, SL-31, and bullet-resistant laminates. Ideal for schools,
                 businesses, and public spaces that need time and deterrence without changing how the building looks.
@@ -146,11 +152,11 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-4">Services</h2>
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
-            I combine physical security, ambassador-supported hardening, and community strategy for schools, companies, and
-            municipalities.
+            I bring together physical security, Clear-Armor and TruArmor protection, and community strategy to help schools,
+            companies, and municipalities harden their buildings and prepare their people.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 items-stretch">
             {[
               {
                 icon: Shield,
@@ -165,11 +171,15 @@ export default function HomePage() {
                 icon: Users,
                 title: 'Community Outreach & Education',
                 items: [
-                  'Safety training and awareness workshops',
-                  'Educational seminars for community leaders',
-                  'Best practice documentation and resources',
-                  'Custom training programs for staff',
+                  'TruTrauma life-safety and crisis training with tailored emergency response planning',
+                  'Immersive scenarios for critical incidents, natural disasters, and active shooter events',
+                  'STOP THE BLEED® with certified Clear-Armor instructors',
+                  'Situational awareness and high-stress decision-making',
                 ],
+                learnMore: {
+                  href: 'https://clear-armor.com/pages/trutrauma-crisis-training',
+                  label: 'TruTrauma crisis training at Clear-Armor',
+                },
               },
               {
                 icon: CheckCircle,
@@ -186,11 +196,11 @@ export default function HomePage() {
               return (
                 <div
                   key={service.title}
-                  className="p-8 bg-slate-900/50 rounded-lg border border-slate-800 hover:border-amber-500/50 transition space-y-4"
+                  className="flex h-full flex-col p-8 bg-slate-900/50 rounded-lg border border-slate-800 hover:border-amber-500/50 transition"
                 >
-                  <Icon className="text-amber-500" size={32} />
-                  <h3 className="text-2xl font-semibold">{service.title}</h3>
-                  <ul className="space-y-2">
+                  <Icon className="text-amber-500 mb-4" size={32} />
+                  <h3 className="text-2xl font-semibold mb-4">{service.title}</h3>
+                  <ul className="flex-1 space-y-2">
                     {service.items.map((item) => (
                       <li key={item} className="flex gap-3 text-slate-300">
                         <ChevronRight size={18} className="text-amber-500 flex-shrink-0 mt-0.5" />
@@ -198,6 +208,17 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
+                  {service.learnMore && (
+                    <a
+                      href={service.learnMore.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-flex items-center gap-2 pt-4 text-sm text-amber-500 hover:text-amber-400 transition"
+                    >
+                      {service.learnMore.label}
+                      <ArrowRight size={16} aria-hidden />
+                    </a>
+                  )}
                 </div>
               );
             })}
@@ -217,11 +238,15 @@ export default function HomePage() {
                 height={280}
                 className="w-56 h-56 md:w-64 md:h-64 rounded-full object-cover object-top border-4 border-slate-800 shadow-lg mx-auto"
               />
-              <img
-                src="/images/victa-official-ambassador.png"
-                alt="Victa Official Ambassador for Clear-Armor and TruArmor"
-                className="max-w-[220px] h-auto mx-auto"
-              />
+              <div
+                className="inline-flex flex-col items-center rounded-lg border border-amber-500/40 bg-slate-900/90 px-5 py-4 text-center max-w-[240px] mx-auto"
+                aria-label="Victa Official Ambassador for Clear-Armor and TruArmor"
+              >
+                <span className="text-xs font-semibold uppercase tracking-wide text-amber-500">
+                  Victa Official Ambassador
+                </span>
+                <span className="text-sm text-slate-300 mt-1">Clear-Armor &amp; TruArmor</span>
+              </div>
             </div>
             <div className="space-y-6 text-lg text-slate-300 flex-1">
               <p>
