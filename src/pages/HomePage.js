@@ -152,8 +152,8 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold mb-4">Services</h2>
           <p className="text-xl text-slate-300 mb-16 max-w-3xl">
-            I combine physical security, ambassador-supported hardening, and community strategy for schools, companies, and
-            municipalities.
+            I bring together physical security, Clear-Armor and TruArmor protection, and community strategy to help schools,
+            companies, and municipalities harden their buildings and prepare their people.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
