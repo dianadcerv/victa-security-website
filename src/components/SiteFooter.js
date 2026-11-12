@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useConsultation } from '../context/ConsultationContext';
+import { SAM_REGISTRATION } from '../data/samRegistration';
 
 export default function SiteFooter() {
   const { openConsultation } = useConsultation();
@@ -37,6 +38,11 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link to="/government" className="hover:text-amber-500 transition">
+                  Government Contracting
+                </Link>
+              </li>
+              <li>
                 <a href="/#about" className="hover:text-amber-500 transition">
                   About
                 </a>
@@ -60,6 +66,11 @@ export default function SiteFooter() {
             <strong>Community Strategy</strong>
           </p>
         </div>
+        <p className="mt-4 text-center text-slate-500 text-xs">
+          <Link to="/government" className="hover:text-amber-500 transition">
+            UEI: {SAM_REGISTRATION.uei} · CAGE: {SAM_REGISTRATION.cageCode}
+          </Link>
+        </p>
         <p className="mt-6 text-center text-slate-500 text-xs tracking-wide">
           Built by Humans Using AI to Further Human Achievements
         </p>
