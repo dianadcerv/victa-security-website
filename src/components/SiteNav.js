@@ -51,6 +51,9 @@ export default function SiteNav() {
           <Link to="/truarmor" className={navLinkClass('/truarmor')}>
             TruArmor
           </Link>
+          <Link to="/government" className={navLinkClass('/government')}>
+            Government
+          </Link>
           <a href={sectionHref('#about')} className="text-slate-300 hover:text-amber-500 transition">
             About
           </a>
@@ -76,6 +79,9 @@ export default function SiteNav() {
           </Link>
           <Link to="/truarmor" className="block text-slate-300 hover:text-amber-500" onClick={closeMenu}>
             TruArmor
+          </Link>
+          <Link to="/government" className="block text-slate-300 hover:text-amber-500" onClick={closeMenu}>
+            Government
           </Link>
           <a href={sectionHref('#about')} className="block text-slate-300 hover:text-amber-500" onClick={closeMenu}>
             About
