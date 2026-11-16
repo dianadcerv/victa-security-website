@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Building2, ChevronRight, Download, FileText, Mail, Shield } from 'lucide-react';
+import { ArrowRight, Building2, ChevronRight, Download, Mail, Shield } from 'lucide-react';
 import PageMeta from '../components/PageMeta';
 import { useConsultation } from '../context/ConsultationContext';
 import {
-  CAPABILITY_STATEMENT_AVAILABLE,
   CAPABILITY_STATEMENT_PATH,
   CONTRACTING_EMAIL,
   NAICS_CODES,
+  PRODUCT_SERVICE_CODES,
   SAM_REGISTRATION,
+  SHOW_CAPABILITY_STATEMENT_SECTION,
 } from '../data/samRegistration';
 
 function formatAddress(addr) {
@@ -18,7 +19,7 @@ function formatAddress(addr) {
 function CardSection({ title, children, className = '' }) {
   return (
     <section className={`p-8 bg-slate-900/50 rounded-lg border border-slate-800 space-y-4 ${className}`}>
-      <h2 className="text-2xl font-bold">{title}</h2>
+      {title ? <h2 className="text-2xl font-bold">{title}</h2> : null}
       {children}
     </section>
   );
@@ -71,36 +72,51 @@ export default function GovernmentPage() {
           </CardSection>
 
           <CardSection title="NAICS codes">
-            {NAICS_CODES.length > 0 ? (
-              <ul className="space-y-3">
-                {NAICS_CODES.map((entry) => (
-                  <li key={entry.code} className="flex gap-3 text-slate-300">
-                    <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={18} />
-                    <span>
-                      <span className="font-semibold text-slate-100">{entry.code}</span>
-                      {entry.title ? (
-                        <>
-                          {': '}
-                          {entry.title}
-                        </>
-                      ) : null}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-slate-400 text-sm rounded-lg border border-dashed border-slate-700 bg-slate-950/50 px-4 py-6 text-center">
-                NAICS codes coming soon
-              </p>
-            )}
+            <ul className="space-y-3">
+              {NAICS_CODES.map((entry) => (
+                <li key={entry.code} className="flex gap-3 text-slate-300">
+                  <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={18} aria-hidden />
+                  <span>
+                    <span className="font-semibold text-slate-100">{entry.code}</span>
+                    {': '}
+                    {entry.title}
+                    {entry.primary ? (
+                      <span className="ml-2 text-xs font-semibold uppercase tracking-wide text-amber-500">Primary</span>
+                    ) : null}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-slate-500 text-sm pt-2 border-t border-slate-800">
+              Registered as a small business under SBA size standards for each NAICS code listed above.
+            </p>
           </CardSection>
         </div>
       </section>
 
       <section className="py-16 px-6 bg-slate-900/50 border-y border-slate-800">
         <div className="max-w-6xl mx-auto">
-          <CardSection title="Capability statement">
-            {CAPABILITY_STATEMENT_AVAILABLE ? (
+          <CardSection title="Product Service Codes (PSC)">
+            <ul className="space-y-3">
+              {PRODUCT_SERVICE_CODES.map((entry) => (
+                <li key={entry.code} className="flex gap-3 text-slate-300">
+                  <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={18} aria-hidden />
+                  <span>
+                    <span className="font-semibold text-slate-100">{entry.code}</span>
+                    {': '}
+                    {entry.title}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CardSection>
+        </div>
+      </section>
+
+      {SHOW_CAPABILITY_STATEMENT_SECTION ? (
+        <section className="py-16 px-6 border-b border-slate-800">
+          <div className="max-w-6xl mx-auto">
+            <CardSection title="Capability statement">
               <a
                 href={CAPABILITY_STATEMENT_PATH}
                 download
@@ -109,29 +125,10 @@ export default function GovernmentPage() {
                 <Download size={20} />
                 Download capability statement (PDF)
               </a>
-            ) : (
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 rounded-lg border border-dashed border-slate-700 bg-slate-950/50 px-6 py-6">
-                <FileText className="text-amber-500 flex-shrink-0" size={32} aria-hidden />
-                <div className="space-y-2 flex-1">
-                  <p className="text-slate-300 font-medium">Capability statement coming soon</p>
-                  <p className="text-slate-500 text-sm">
-                    PDF will be published at{' '}
-                    <code className="text-slate-400 font-mono text-xs">{CAPABILITY_STATEMENT_PATH}</code>
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  disabled
-                  className="px-4 py-2 rounded-lg border border-slate-700 text-slate-500 text-sm font-semibold cursor-not-allowed"
-                  aria-disabled="true"
-                >
-                  Download
-                </button>
-              </div>
-            )}
-          </CardSection>
-        </div>
-      </section>
+            </CardSection>
+          </div>
+        </section>
+      ) : null}
 
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto space-y-8">
@@ -159,7 +156,7 @@ export default function GovernmentPage() {
                   'Bullet-resistant laminate options for critical access points when glass assembly supports rated performance',
                 ].map((item) => (
                   <li key={item} className="flex gap-2">
-                    <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={16} />
+                    <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={16} aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -179,7 +176,7 @@ export default function GovernmentPage() {
                   'Customizable for doors, windows, and windshields',
                 ].map((item) => (
                   <li key={item} className="flex gap-2">
-                    <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={16} />
+                    <ChevronRight className="text-amber-500 flex-shrink-0 mt-0.5" size={16} aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
