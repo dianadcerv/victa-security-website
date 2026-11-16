@@ -201,18 +201,19 @@ export default function GovernmentPage() {
               <Mail size={18} />
               {CONTRACTING_EMAIL}
             </a>
-            <Link
-              to="/"
+            <button
+              type="button"
+              onClick={() => openConsultation('Physical Security Assessment')}
               className="inline-flex items-center gap-2 px-6 py-3 border border-slate-700 rounded-lg font-semibold text-slate-300 hover:border-amber-500 hover:text-amber-500 transition"
             >
               Contact via assessment request
               <ArrowRight size={18} />
-            </Link>
+            </button>
           </div>
           <p className="text-center">
             <button
               type="button"
-              onClick={() => openConsultation('Government / contracting inquiry')}
+              onClick={() => openConsultation('Physical Security Assessment')}
               className="text-sm text-slate-400 hover:text-amber-500 underline-offset-2 hover:underline"
             >
               Open the consultation form now
