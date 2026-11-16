@@ -17,7 +17,6 @@ export const SAM_REGISTRATION = {
 export const NAICS_CODES = [
   { code: '238150', title: 'Glass and Glazing Contractors', primary: true },
   { code: '238390', title: 'Other Building Finishing Contractors' },
-  { code: '444180', title: 'Other Building Material Dealers' },
   { code: '541618', title: 'Other Management Consulting Services' },
   { code: '541690', title: 'Other Scientific and Technical Consulting Services' },
   { code: '561621', title: 'Security Systems Services (except Locksmiths)' },
