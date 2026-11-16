@@ -19,7 +19,6 @@ export const NAICS_CODES = [
   { code: '238390', title: 'Other Building Finishing Contractors' },
   { code: '541618', title: 'Other Management Consulting Services' },
   { code: '541690', title: 'Other Scientific and Technical Consulting Services' },
-  { code: '561621', title: 'Security Systems Services (except Locksmiths)' },
   { code: '811122', title: 'Automotive Glass Replacement Shops' },
 ];
 
